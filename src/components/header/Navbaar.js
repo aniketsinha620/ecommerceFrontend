@@ -18,6 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from "react-redux"
 import { BASE_URL } from '../../helper';
+import Cookies from "js-cookie";
 
 
 const Navbaar = () => {
@@ -44,8 +45,9 @@ const Navbaar = () => {
 
     const [dropen, setDropen] = useState(false)
 
-     const getdetailvaliduser = async () => {
-        const accessToken = localStorage.getItem("accessToken");
+    const getdetailvaliduser = async () => {
+        const accessToken = Cookies.get("accessToken");
+        console.log("accessToken:", accessToken);
         const res = await fetch(`${BASE_URL}/validuser`, {
             method: "GET",
             headers: {
@@ -88,7 +90,6 @@ const Navbaar = () => {
         return null;
     };
 
-    console.log(getAccessToken())
     const logoutuser = async () => {
         const res2 = await fetch(`${BASE_URL}/lougout`, {
             method: "GET",
@@ -180,7 +181,7 @@ const Navbaar = () => {
 
                         {
                             authUser ? <NavLink to="/buynow">
-                                <Badge badgeContent={authUser.carts.length} color="primary">
+                                <Badge badgeContent={(authUser.carts || []).length} color="primary">
                                     <ShoppingCartIcon id="icon" />
                                 </Badge>
                             </NavLink> : <NavLink to="/login">
@@ -201,7 +202,7 @@ const Navbaar = () => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}
-                        >{authUser.fname[0].toUpperCase()}</Avatar> :
+                        >{authUser.fname[0].toUpperCase() || ""}</Avatar> :
                             <Avatar className='avtar'
                                 id="basic-button"
                                 aria-controls={open ? 'basic-menu' : undefined}

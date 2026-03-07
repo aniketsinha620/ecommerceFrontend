@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from '../context/AuthContext';
 import { BASE_URL } from '../../helper';
+import Cookies from "js-cookie";
 
 const Sign_in = () => {
 
@@ -32,7 +33,6 @@ const Sign_in = () => {
         e.preventDefault();
 
         const { email, password } = logdata;
-        console.log(logdata)
         const res = await fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
@@ -44,7 +44,6 @@ const Sign_in = () => {
                 email, password
             })
         });
-        console.log("res", res)
 
 
         const data = await res.json();
@@ -58,9 +57,13 @@ const Sign_in = () => {
         } else {
             console.log("data valid");
             setAuthUser(data)
-            toast.success("user valid", {
-                position: "top-center",
-            })
+            if (data?.tokens?.length > 1) {
+                let len = data?.tokens?.length
+                Cookies.set("accessToken", data?.tokens?.[len-1]?.token, { expires: 7 });
+                toast.success("user valid", {
+                    position: "top-center",
+                })
+            }
             setData({ ...logdata, email: "", password: "" });
         }
     }

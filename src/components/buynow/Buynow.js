@@ -4,6 +4,7 @@ import Option from './Option';
 import Right from './Right';
 import Subtotal from './Subtotal';
 import "./buynow.css";
+import Cookies from "js-cookie";
 import { BASE_URL } from '../../helper';
 
 const Buynow = () => {
@@ -11,8 +12,9 @@ const Buynow = () => {
     const [cartdata, setCartdata] = useState("");
 
     const getdatabuy = async () => {
+        const accessToken = Cookies.get("accessToken");
 
-         const accessToken = localStorage.getItem("accessToken");
+        console.log("accessToken:", accessToken);
         const res = await fetch(`${BASE_URL}/cartdetails`, {
             method: "GET",
             headers: {
