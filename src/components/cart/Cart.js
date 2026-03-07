@@ -47,11 +47,13 @@ const Cart = () => {
   // add cart function
   const addtocart = async (id) => {
     console.log(id)
+    const accessToken = localStorage.getItem("accessToken");
     const checkres = await fetch(`${BASE_URL}/addcart/${id}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${accessToken}`
       },
       body: JSON.stringify({
         inddata
