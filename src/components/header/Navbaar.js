@@ -44,12 +44,14 @@ const Navbaar = () => {
 
     const [dropen, setDropen] = useState(false)
 
-    const getdetailvaliduser = async () => {
+     const getdetailvaliduser = async () => {
+        const accessToken = localStorage.getItem("accessToken");
         const res = await fetch(`${BASE_URL}/validuser`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`
             },
             credentials: "include"
         });
@@ -65,6 +67,7 @@ const Navbaar = () => {
         }
 
     };
+
 
     const handleopen = () => {
         setDropen(true)
