@@ -6,7 +6,7 @@ import { useAuthContext } from '../context/AuthContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BASE_URL } from '../../helper';
 
-
+//lorem
 const Cart = () => {
 
   const navigate = useNavigate();
