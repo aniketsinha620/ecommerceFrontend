@@ -3,9 +3,9 @@ import App from './App';
 import { AuthContextProvider } from './components/context/AuthContext';
 
 test('renders learn react link', () => {
-  render(<AuthContextProviderr>
+  render(<AuthContextProvider>
     <App />
-  </AuthContextProviderr>);
+  </AuthContextProvider>);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
