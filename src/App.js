@@ -10,12 +10,10 @@ import Buynow from './components/buynow/Buynow';
 import { Routes, Route } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect, useState } from 'react';
-import { useAuthContext } from './components/context/AuthContext';
 
 function App() {
 
   const [data, setData] = useState(false);
-  const { auth } = useAuthContext()
   useEffect(() => {
     setTimeout(() => {
       setData(true)
