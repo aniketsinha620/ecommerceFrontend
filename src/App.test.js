@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import { AuthContextProvider } from './components/context/AuthContext';
 
-test('shows loading initially', () => {
+test('shows loader initially', () => {
   render(
     <AuthContextProvider>
       <App />
     </AuthContextProvider>
   );
 
-  const loadingText = screen.getByText(/loading/i);
-  expect(loadingText).toBeInTheDocument();
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  expect(screen.getByRole('progressbar')).toBeInTheDocument();
 });
